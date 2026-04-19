@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Sistema CRAS | Inteligência em Assistência Social</title>
+    <meta name="description" content="Ecossistema tecnológico desenvolvido na Bahia para gestão da Proteção Social. Inteligência de dados, GIS e eficiência em custos.">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sistemacras.com.br/">
+    <meta property="og:title" content="Sistema CRAS | Inovação no SUAS">
+    <meta property="og:description" content="A revolução da Proteção Social através da Inteligência de Dados e Geoprocessamento. Conheça a plataforma premiada com o Selo SUAS de Inovação.">
+    <meta property="og:image" content="https://sistemacras.com.br/img/logo.jpg">
+
+    <link rel="icon" href="img/logo.jpg" type="image/jpeg">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1a6473;
+            --primary-light: #268a9d;
+            --secondary: #93c045;
+            --dark: #0f2d34;
+            --light: #f4f7f6;
+            --gold: #d4af37;
+            --glass: rgba(255, 255, 255, 0.85);
+            --gradient: linear-gradient(135deg, #1a6473 0%, #0f2d34 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animações Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Background Decorativo */
+        .tech-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at top right, rgba(147, 192, 69, 0.08), transparent),
+                        radial-gradient(circle at bottom left, rgba(26, 100, 115, 0.08), transparent);
+        }
+
+        /* Header */
+        header {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img { height: 60px; transition: transform 0.3s ease; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .logo img:hover { transform: scale(1.05); }
+
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; position: relative; transition: color 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--secondary); transition: width 0.3s ease; }
+        .nav-links a:hover { color: var(--primary-light); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-btn { background: var(--primary); color: white !important; padding: 0.6rem 1.5rem; border-radius: 50px; box-shadow: 0 4px 15px rgba(26, 100, 115, 0.2); }
+        .nav-btn::after { display: none; }
+        .nav-btn:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26, 100, 115, 0.3); }
+
+        /* Hero */
+        .hero {
+            padding: 180px 2rem 100px;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+        }
+        .hero h1 { font-family: 'Montserrat', sans-serif; font-size: 3.5rem; margin-bottom: 1.5rem; background: linear-gradient(to right, #fff, var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { max-width: 800px; margin: 0 auto 2rem; font-size: 1.2rem; opacity: 0.9; }
+        
+        .btn-main { background: var(--secondary); color: white; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; display: inline-block; box-shadow: 0 10px 20px rgba(147, 192, 69, 0.3); transition: 0.3s; border: none; cursor: pointer; font-size: 1.1rem; }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(147, 192, 69, 0.4); }
+
+        /* Seções */
+        section { padding: 80px 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 4rem; }
+        .section-title h2 { font-family: 'Montserrat', sans-serif; font-size: 2.5rem; color: var(--primary); }
+        .section-title span { display: block; width: 60px; height: 4px; background: var(--secondary); margin: 10px auto; border-radius: 2px; }
+
+        /* Premiação */
+        .award-section { background: white; border-radius: 25px; padding: 4rem; box-shadow: 0 20px 40px rgba(0,0,0,0.05); margin-top: -40px; position: relative; z-index: 10; border: 1px solid rgba(212, 175, 55, 0.2); }
+        .award-content { display: flex; align-items: center; justify-content: space-between; gap: 4rem; }
+        .award-text { flex: 1; }
+        .award-text h3 { font-family: 'Montserrat', sans-serif; font-size: 2rem; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+        .award-text p { font-size: 1.1rem; color: #555; margin-bottom: 1.5rem; }
+        .award-images { flex: 1; display: flex; gap: 1.5rem; justify-content: center; }
+        .award-images img { width: 100%; max-width: 220px; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.15); transition: transform 0.5s; }
+        .award-images img:hover { transform: translateY(-15px) scale(1.02); }
+
+        /* Funcionalidades */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature-card { background: white; padding: 3rem 2rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); text-align: center; transition: 0.4s ease; border: 1px solid rgba(0,0,0,0.02); position: relative; overflow: hidden; }
+        .feature-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--secondary); transform: scaleX(0); transition: transform 0.4s ease; }
+        .feature-card:hover { transform: translateY(-10px); }
+        .feature-card:hover::before { transform: scaleX(1); }
+        .feature-card i { font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem; }
+
+        /* FAQ */
+        .faq-section { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: white; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.03); overflow: hidden; border: 1px solid rgba(0,0,0,0.05); }
+        .faq-question { width: 100%; text-align: left; padding: 1.5rem; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
+        .faq-question:hover { background: #fafafa; color: var(--primary); }
+        .faq-question i { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); color: var(--secondary); }
+        .faq-question.active i { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); background: white; }
+        .faq-answer p { padding: 0 1.5rem 1.5rem; color: #555; }
+
+        /* Depoimentos */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .testimonial-card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; }
+        .testimonial-card i.fa-quote-left { font-size: 2rem; color: rgba(147, 192, 69, 0.3); position: absolute; top: 20px; left: 20px; }
+        .testimonial-text { font-style: italic; color: #555; margin-top: 1rem; margin-bottom: 1.5rem; font-size: 1.05rem; position: relative; z-index: 2; }
+        .testimonial-author { display: flex; align-items: center; gap: 15px; border-top: 1px solid #eee; padding-top: 1rem; }
+        .author-icon { width: 50px; height: 50px; border-radius: 50%; background: var(--primary-light); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .author-info h4 { color: var(--primary); font-size: 1rem; }
+        .author-info p { color: #888; font-size: 0.85rem; }
+
+        /* Slider */
+        .slider-container { position: relative; max-width: 1000px; margin: 0 auto; overflow: hidden; border-radius: 15px; box-shadow: 0 25px 50px rgba(0,0,0,0.2); background: var(--dark); }
+        .slides { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .slide { min-width: 100%; display: flex; flex-direction: column; }
+        .img-stage { width: 100%; height: 500px; background: radial-gradient(circle, #268a9d 0%, #0f2d34 100%); display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .img-stage img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .slide-caption { background: var(--dark); color: white; padding: 1.5rem 3rem; text-align: center; font-weight: 500; border-top: 3px solid var(--secondary); min-height: 80px; display: flex; align-items: center; justify-content: center; }
+        .slider-btn { position: absolute; top: calc(500px / 2); transform: translateY(-50%); background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); color: white; border: 1px solid rgba(255,255,255,0.3); width: 50px; height: 50px; border-radius: 50%; cursor: pointer; z-index: 10; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .slider-btn:hover { background: var(--secondary); border-color: var(--secondary); transform: translateY(-50%) scale(1.1); }
+        .prev { left: 15px; }
+        .next { right: 15px; }
+
+        /* Contato */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 800px; margin: 0 auto; }
+        .contact-card { background: white; padding: 2.5rem; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-bottom: 4px solid var(--primary); transition: 0.3s; }
+        .contact-card:hover { transform: translateY(-5px); }
+        .contact-card i { font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem; }
+        .contact-card h4 { color: var(--primary); font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .contact-card p { color: #555; font-weight: 500; font-size: 1.1rem; }
+
+        /* WhatsApp */
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; right: 30px; background-color: #25d366; color: #FFF; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; animation: pulse-green 2s infinite; }
+        .whatsapp-float:hover { transform: scale(1.1); color: #FFF; }
+        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+
+        /* Rodapé */
+        footer { background: var(--dark); color: white; padding: 4rem 2rem; text-align: center; margin-top: 2rem; }
+        .footer-info { opacity: 0.7; font-size: 0.9rem; margin-top: 1rem; }
+
+        @media (max-width: 900px) { .award-content { flex-direction: column; gap: 2rem; text-align: center; } .award-text h3 { justify-content: center; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 2.2rem; } .nav-links { display: none; } .img-stage { height: 350px; } .award-section { padding: 2rem; } .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 25px; } }
+    </style>
+</head>
+<body>
+
+    <div class="tech-bg"></div>
+
+    <a href="https://wa.me/5575999129613" class="whatsapp-float" target="_blank" title="Fale com a nossa equipe">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="img/logo.jpg" alt="Sistema CRAS Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#conquistas">Reconhecimento</a></li>
+                <li><a href="#funcionalidades">Tecnologia</a></li>
+                <li><a href="#galeria">Plataforma</a></li>
+                <li><a href="#faq">Dúvidas</a></li>
+                <li><a href="#contato" class="nav-btn">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <i class="fas fa-microchip" style="font-size: 3rem; margin-bottom: 1rem; color: var(--secondary);"></i>
+        <h1>SISTEMA CRAS</h1>
+        <p>A revolução da Gestão Social Básica através de Inteligência e Geoprocessamento. Deixe o papel para trás e entre na era da Gestão Baseada em Evidências.</p>
+        <a href="#galeria" class="btn-main">Conhecer Plataforma</a>
+    </section>
+
+    <section id="conquistas" class="reveal">
+        <div class="award-section">
+            <div class="award-content">
+                <div class="award-text">
+                    <h3><i class="fas fa-award"></i> Selo SUAS de Inovação</h3>
+                    <p>Nossa plataforma foi oficialmente reconhecida com o <strong>Selo de Inovação</strong>, concedido em nível estadual.</p>
+                    <p>Esta conquista atesta a excelência, modernização e o impacto real da tecnologia na otimização da Assistência, servindo como modelo eficiente e prático.</p>
+                </div>
+                <div class="award-images">
+                    <img src="img/Foto de Symple App.jpg" alt="Troféu Selo de Inovação - Visão 1" loading="lazy">
+                    <img src="img/Foto de Symple App (1).jpg" alt="Troféu Selo de Inovação - Visão 2" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="funcionalidades" class="reveal">
+        <div class="section-title">
+            <h2>Poder Tecnológico</h2>
+            <span></span>
+            <p>Desenvolvimento focado em extrema eficiência e viabilidade técnica.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Painéis Inteligentes</h3>
+                <p>Monitore os indicadores sociais em tempo real, organizando dados dispersos para facilitar a tomada de decisão.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Georreferenciamento</h3>
+                <p>Mapas de calor e localização estratégica para identificar áreas prioritárias e otimizar rotas de visitas.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Modo Desconectado</h3>
+                <p>Registre dados em campo mesmo sem internet. A sincronização ocorre automaticamente ao encontrar uma rede disponível.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="reveal">
+        <div class="section-title">
+            <h2>O Impacto na Prática</h2>
+            <span></span>
+            <p>Como a tecnologia transforma o dia a dia das equipes em campo.</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <i class="fas fa-quote-left"></i>
+                <p class="testimonial-text">"Antes, as informações ficavam espalhadas em arquivos físicos. Hoje, temos alertas automáticos e relatórios completos gerados com apenas um clique."</p>
+                <div class="testimonial-author">
+                    <div class="author-icon"><i class="fas fa-user-check"></i></div>
+                    <div class="author-info">
+                        <h4>Atendimento Técnico</h4>
+                        <p>Acompanhamento e Rastreabilidade</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <i class="fas fa-quote-left"></i>
+                <p class="testimonial-text">"A visualização espacial mudou nossa forma de trabalhar. Conseguimos direcionar esforços e recursos exatamente para as áreas com maior necessidade."</p>
+                <div class="testimonial-author">
+                    <div class="author-icon"><i class="fas fa-map-pin"></i></div>
+                    <div class="author-info">
+                        <h4>Vigilância Territorial</h4>
+                        <p>Gestão de Espaços</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="reveal">
+        <div class="section-title">
+            <h2>Interface & Telas</h2>
+            <span></span>
+            <p>Explore as funcionalidades do nosso ecossistema integrado.</p>
+        </div>
+
+        <div class="slider-container" id="slider-main">
+            <button class="slider-btn prev" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
+            
+            <div class="slides" id="slider">
+                <div class="slide">
+                    <div class="img-stage"><img src="img/58d22af4-5298-4eb6-b988-809f22b2a315.png" alt="Painel de Atendimento" loading="lazy"></div>
+                    <div class="slide-caption">Home do App: Acesso rápido aos painéis de controle e gestão diária.</div>
+                </div>
+                <div class="slide">
+                    <div class="img-stage"><img src="img/dashboard1.png" alt="Dashboard BI" loading="lazy"></div>
+                    <div class="slide-caption">Painel Analítico: Visão unificada de metas e indicadores de desempenho.</div>
+                </div>
+                <div class="slide">
+                    <div class="img-stage"><img src="img/dashboard2.png" alt="SLA" loading="lazy"></div>
+                    <div class="slide-caption">Métricas: Desempenho detalhado por equipe e análise de riscos sociais.</div>
+                </div>
+                <div class="slide">
+                    <div class="img-stage"><img src="img/dashboard3.png" alt="Evolução" loading="lazy"></div>
+                    <div class="slide-caption">Gráficos de Evolução: Acompanhamento mensal de vínculos e visitas ativas.</div>
+                </div>
+                <div class="slide">
+                    <div class="img-stage"><img src="img/mapa.jpg" alt="Mapa" loading="lazy"></div>
+                    <div class="slide-caption">Mapa Dinâmico: Marcação precisa e individualizada de cada família atendida.</div>
+                </div>
+                <div class="slide">
+                    <div class="img-stage"><img src="img/mapa2.jpg" alt="Mapa 2" loading="lazy"></div>
+                    <div class="slide-caption">Auditoria Espacial: Verificação e registro das rotas realizadas em campo.</div>
+                </div>
+                <div class="slide">
+                    <div class="img-stage"><img src="img/mapa3.png" alt="Heatmap" loading="lazy"></div>
+                    <div class="slide-caption">Visão de Concentração: Identificação clara das maiores vulnerabilidades do território.</div>
+                </div>
+                <div class="slide">
+                    <div class="img-stage"><img src="img/Buscaativa.png" alt="Busca Ativa" loading="lazy"></div>
+                    <div class="slide-caption">Tabela Estratégica: Sugestões de ações imediatas para acompanhamento preventivo.</div>
+                </div>
+                <div class="slide">
+                    <div class="img-stage"><img src="img/Planos.png" alt="Planos" loading="lazy"></div>
+                    <div class="slide-caption">Documentação Digital: Criação de planos de intervenção padronizados e organizados.</div>
+                </div>
+                <div class="slide">
+                    <div class="img-stage"><img src="img/Registro.png" alt="Registro" loading="lazy"></div>
+                    <div class="slide-caption">Histórico Eletrônico: Fichas de acompanhamento centralizadas com informações atualizadas.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="reveal">
+        <div class="section-title">
+            <h2>Perguntas Frequentes</h2>
+            <span></span>
+            <p>Entenda os detalhes da nossa implementação tecnológica.</p>
+        </div>
+
+        <div class="faq-section">
+            <div class="faq-item">
+                <button class="faq-question">
+                    Como o aplicativo lida com a falta de internet em áreas isoladas?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>A estrutura foi montada para operar primariamente sem conexão (Offline) para visitas em campo. As informações coletadas presencialmente são armazenadas no próprio aparelho móvel. Quando a equipe retorna para um local com rede ativa, tudo é enviado automaticamente para a base de dados principal.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    A plataforma pode ser expandida para outros serviços da gestão?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Sim, a arquitetura é totalmente modulável. É possível criar novas áreas para abranger diferentes programas sociais, benefícios eventuais e outras necessidades específicas da secretaria, mantendo tudo integrado em um só lugar e altamente personalizável para cada necessidade.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Como funciona a questão financeira e os custos envolvidos?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>O foco foi utilizar soluções nativas e plataformas corporativas já acessíveis. Ao aproveitar ferramentas robustas disponíveis no mercado, conseguimos entregar altíssima qualidade técnica e inovação sem gerar dependência de licitações custosas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="reveal">
+        <div class="section-title">
+            <h2>Fale Conosco</h2>
+            <span></span>
+            <p>Pronto para modernizar a gestão da sua cidade?</p>
+        </div>
+        
+        <div class="contact-grid">
+            <div class="contact-card">
+                <i class="fab fa-whatsapp"></i>
+                <h4>Telefone / WhatsApp</h4>
+                <p><a href="https://wa.me/5575999129613" style="text-decoration: none; color: inherit;" target="_blank">(75) 99912-9613</a></p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-envelope-open-text"></i>
+                <h4>E-mail</h4>
+                <p><a href="mailto:wagnermorais@sympleapp.com.br" style="text-decoration: none; color: inherit;">wagnermorais@sympleapp.com.br</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3 style="font-family: 'Montserrat';">SISTEMA CRAS - PLATAFORMA DIGITAL</h3>
+        <p>Excelência Tecnológica em Assistência Social</p>
+        <div class="footer-info">
+            <p><i class="fas fa-user-tie"></i> Desenvolvido por Wagner M. Santana, Diretor da Proteção Social Básica de Adustina-BA</p>
+            <p><i class="fas fa-university"></i> Focado em Inovação Pública Municipal</p>
+            <p>© 2026 Sistema CRAS. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Lógica do Slider
+        let currentSlide = 0;
+        const slides = document.getElementById('slider');
+        const sliderContainer = document.getElementById('slider-main');
+        const totalSlides = document.querySelectorAll('.slide').length;
+        let slideTimer;
+
+        function showSlide(index) {
+            if (index >= totalSlides) currentSlide = 0;
+            else if (index < 0) currentSlide = totalSlides - 1;
+            else currentSlide = index;
+            
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function moveSlide(step) {
+            showSlide(currentSlide + step);
+            resetTimer();
+        }
+
+        function startTimer() {
+            slideTimer = setInterval(() => { showSlide(currentSlide + 1); }, 3500);
+        }
+
+        function resetTimer() {
+            clearInterval(slideTimer);
+            startTimer();
+        }
+
+        startTimer();
+
+        sliderContainer.addEventListener('mouseenter', () => clearInterval(slideTimer));
+        sliderContainer.addEventListener('mouseleave', startTimer);
+        sliderContainer.addEventListener('touchstart', () => clearInterval(slideTimer));
+        sliderContainer.addEventListener('touchend', () => setTimeout(startTimer, 3000));
+
+        // Lógica Scroll Reveal
+        function revealElements() {
+            var reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            reveals.forEach(reveal => observer.observe(reveal));
+        }
+        window.addEventListener('DOMContentLoaded', revealElements);
+
+        // Lógica FAQ
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isOpen = question.classList.contains('active');
+
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.style.maxHeight = null;
+                });
+
+                if (!isOpen) {
+                    question.classList.add('active');
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
